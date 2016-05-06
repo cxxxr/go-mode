@@ -415,6 +415,11 @@ functions, and some types.  It also provides indentation that is
 	buffer-mode 'go-mode)
   (use-syntax-table *go-mode-syntax-table*)
   
+  (make-local-variable 'paragraph-start)
+  (setq paragraph-start "^$\\|\f")
+  (make-local-variable 'paragraph-separate)
+  (setq paragraph-separate paragraph-start)
+
   ;; Font lock
   (make-local-variable 'regexp-keyword-list)
   (setq regexp-keyword-list (go-mode-regexp-keyword-list))
