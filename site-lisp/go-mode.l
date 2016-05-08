@@ -395,7 +395,12 @@ indented one level."
 
 (defun go-format-buffer ()
   (interactive)
-  (filter-region *gofmt-command* (point-min) (point-max)))
+  (let ((point (point)))
+    (filter-buffer (format nil "~A ~A" *gofmt-command* (get-buffer-file-name)))
+    (beginning-of-buffer)
+    (when (char= #\Page (following-char))
+      (delete-char))
+    (goto-char point)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Go mode
